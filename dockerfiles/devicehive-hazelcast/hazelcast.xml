@@ -2,6 +2,10 @@
 <hazelcast xsi:schemaLocation="http://www.hazelcast.com/schema/config hazelcast-config-3.9.xsd"
            xmlns="http://www.hazelcast.com/schema/config"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <properties>
+     <property name="hazelcast.discovery.enabled">true</property>
+   </properties>
+
    <serialization>
       <portable-version>0</portable-version>
       <portable-factories>
@@ -25,4 +29,15 @@
    <management-center enabled="false">
       http://127.0.0.1:8090/mancenter
    </management-center>
+
+   <network>
+     <join>
+       <multicast enabled="false"/>
+       <tcp-ip enabled="false" />
+       <discovery-strategies>
+         <discovery-strategy enabled="true" class="com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategy">
+         </discovery-strategy>
+       </discovery-strategies>
+     </join>
+   </network>
 </hazelcast>
